@@ -29,7 +29,7 @@ services:
       - RABBIT_CONNECTION_HOSTNAME=rabbit
       - SERVICE_NAME=sber
       - ADDITIONAL_READ_FROM=failover
-    inks:
+    links:
       - rabbit
     epends_on:
       - rabbit
