@@ -28,7 +28,7 @@ services:
     environment:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=pochta
-      - ADDITIONAL_READ_FROM=default
+      - ADDITIONAL_READ_FROM=primary
 
   passage_gcs:
     image: finnetrolle/choreo-passage:latest
@@ -37,4 +37,4 @@ services:
     environment:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=gcs
-      - ADDITIONAL_READ_FROM=
+      - ADDITIONAL_READ_FROM=done
