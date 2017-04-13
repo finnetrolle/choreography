@@ -2,20 +2,12 @@
 version: '3'
 services:
 
-  rabbit:
-    image: rabbitmq:alpine
-    container_name: rabbit
-    hostname: rabbit
-    environment:
-      - ERLANG_COOKIE=abcdefg
-    restart: always
-
   crossroad:
     image: finnetrolle/choreo-crossroad:latest
     container_name: crossroad
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
     links:
       - rabbit
     ports:
@@ -28,7 +20,7 @@ services:
     container_name: passage_sber
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=sber
       - ADDITIONAL_READ_FROM=failover
     links:
@@ -41,7 +33,7 @@ services:
     container_name: passage_pochta
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=pochta
       - ADDITIONAL_READ_FROM=default
     links:
@@ -54,7 +46,7 @@ services:
     container_name: passage_gcs
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=gcs
       - ADDITIONAL_READ_FROM=
     links:
