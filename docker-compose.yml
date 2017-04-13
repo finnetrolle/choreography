@@ -8,12 +8,8 @@ services:
     restart: always
     environment:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
-    links:
-      - rabbit
     ports:
       - "8000:8000"
-    depends_on:
-      - rabbit
 
   passage_sber:
     image: finnetrolle/choreo-passage:latest
@@ -23,10 +19,6 @@ services:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=sber
       - ADDITIONAL_READ_FROM=failover
-    links:
-      - rabbit
-    depends_on:
-      - rabbit
 
   passage_pochta:
     image: finnetrolle/choreo-passage:latest
@@ -36,10 +28,6 @@ services:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=pochta
       - ADDITIONAL_READ_FROM=default
-    links:
-      - rabbit
-    depends_on:
-      - rabbit
 
   passage_gcs:
     image: finnetrolle/choreo-passage:latest
@@ -49,7 +37,3 @@ services:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
       - SERVICE_NAME=gcs
       - ADDITIONAL_READ_FROM=
-    links:
-      - rabbit
-    depends_on:
-      - rabbit
