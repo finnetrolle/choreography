@@ -8,6 +8,7 @@ services:
     restart: always
     environment:
       - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+      - SERVER_PORT=8000
     ports:
       - "8000:8000"
 
@@ -20,20 +21,20 @@ services:
       - SERVICE_NAME=sber
       - ADDITIONAL_READ_FROM=failover
 
-  passage_pochta:
-    image: finnetrolle/choreo-passage:latest
-    container_name: passage_pochta
-    restart: always
-    environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
-      - SERVICE_NAME=pochta
-      - ADDITIONAL_READ_FROM=default
+#  passage_pochta:
+#    image: finnetrolle/choreo-passage:latest
+#    container_name: passage_pochta
+#    restart: always
+#    environment:
+#      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+#      - SERVICE_NAME=pochta
+#      - ADDITIONAL_READ_FROM=default
 
-  passage_gcs:
-    image: finnetrolle/choreo-passage:latest
-    container_name: passage_gcs
-    restart: always
-    environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
-      - SERVICE_NAME=gcs
-      - ADDITIONAL_READ_FROM=
+#  passage_gcs:
+#    image: finnetrolle/choreo-passage:latest
+#    container_name: passage_gcs
+#    restart: always
+#    environment:
+#      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+#      - SERVICE_NAME=gcs
+#      - ADDITIONAL_READ_FROM=
