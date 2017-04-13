@@ -31,7 +31,7 @@ services:
       - ADDITIONAL_READ_FROM=failover
     links:
       - rabbit
-    epends_on:
+    depends_on:
       - rabbit
 
   passage_pochta:
