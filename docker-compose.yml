@@ -9,7 +9,7 @@ services:
     restart: always
 
   crossroad:
-    image: finnetrolle/crossroad:latest
+    image: finnetrolle/choreo_crossroad:latest
     container_name: crossroad
     restart: always
     environment:
@@ -22,7 +22,7 @@ services:
       - rabbit
 
   passage_sber:
-    image: finnetrolle/crossroad:latest
+    image: finnetrolle/choreo_passage:latest
     container_name: passage_sber
     restart: always
     environment:
@@ -35,7 +35,7 @@ services:
       - rabbit
 
   passage_pochta:
-    image: finnetrolle/crossroad:latest
+    image: finnetrolle/choreo_passage:latest
     container_name: passage_pochta
     restart: always
     environment:
@@ -48,7 +48,7 @@ services:
       - rabbit
 
   passage_gcs:
-    image: finnetrolle/crossroad:latest
+    image: finnetrolle/choreo_passage:latest
     container_name: passage_gcs
     restart: always
     environment:
