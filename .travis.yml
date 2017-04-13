@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk: oraclejdk8
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CROSSROAD
+  - export CROSSROAD=finnetrolle/choreo-crossroad
+  - docker build -t $CROSSROAD:$COMMIT ./crossroad
+  - docker tag $CROSSROAD:$COMMIT $CROSSROAD:$TAG
+  - docker push $CROSSROAD
+
+  # PASSAGE
+  - export PASSAGE=finnetrolle/choreo-passage
+  - docker build -t $PASSAGE:$COMMIT ./passage
+  - docker tag $PASSAGE:$COMMIT $PASSAGE:$TAG
+  - docker push $PASSAGE

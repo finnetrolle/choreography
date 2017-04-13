@@ -1,0 +1,61 @@
+# this is an example telebot docker-compose file
+version: '3'
+services:
+
+  rabbit:
+    image: rabbitmq:alpine
+    container_name: some-rabbit
+    hostname: my-rabbit
+    restart: always
+
+  crossroad:
+    image: finnetrolle/crossroad:latest
+    container_name: crossroad
+    restart: always
+    environment:
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
+    links:
+      -rabbit
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rabbit
+
+  passage_sber:
+    image: finnetrolle/crossroad:latest
+    container_name: passage_sber
+    restart: always
+    environment:
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - SERVICE_NAME=sber
+      - ADDITIONAL_READ_FROM=failover
+     inks:
+      - rabbit
+     epends_on:
+      - rabbit
+
+  passage_pochta:
+    image: finnetrolle/crossroad:latest
+    container_name: passage_pochta
+    restart: always
+    environment:
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - SERVICE_NAME=pochta
+      - ADDITIONAL_READ_FROM=default
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
+
+  passage_gcs:
+    image: finnetrolle/crossroad:latest
+    container_name: passage_gcs
+    restart: always
+    environment:
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
+      - SERVICE_NAME=gcs
+      - ADDITIONAL_READ_FROM=
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
