@@ -4,8 +4,10 @@ services:
 
   rabbit:
     image: rabbitmq:alpine
-    container_name: some-rabbit
-    hostname: my-rabbit
+    container_name: rabbit
+    hostname: rabbit
+    environment:
+      - ERLANG_COOKIE=abcdefg
     restart: always
 
   crossroad:
