@@ -15,9 +15,9 @@ services:
     environment:
       - RABBIT_CONNECTION_HOSTNAME=rabbit
     links:
-      -rabbit
+      - rabbit
     ports:
-      - "8080:8080"
+      - "8000:8000"
     depends_on:
       - rabbit
 
