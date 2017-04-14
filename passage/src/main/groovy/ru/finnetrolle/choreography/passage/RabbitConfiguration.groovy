@@ -78,10 +78,10 @@ class RabbitConfiguration {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
         factory.setMessageConverter(jsonMessageConverter());
-        factory.setConcurrentConsumers(1);
-        factory.setPrefetchCount(5);
-        factory.setReceiveTimeout(10000L);
-        factory.setMaxConcurrentConsumers(1);
+        factory.setConcurrentConsumers(5);
+        factory.setPrefetchCount(1);
+        factory.setReceiveTimeout(1000L);
+        factory.setMaxConcurrentConsumers(5);
         return factory;
     }
 
