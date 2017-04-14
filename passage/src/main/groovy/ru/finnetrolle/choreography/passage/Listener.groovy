@@ -34,7 +34,7 @@ class Listener {
     String handleDirect(String data) {
         def i = counter.incrementAndGet()
         println "$i\t>>\t$name received from DIRECT: $data"
-        Thread.sleep(100)
+//        Thread.sleep(100)
         return "$data;$name;${UUID.randomUUID().toString()}".toString()
 //        template.convertAndSend("choreo_done", "", "$data;${UUID.randomUUID().toString()}")
     }
@@ -43,7 +43,7 @@ class Listener {
     String handleDefault(String data) {
         def i = counter.incrementAndGet()
         println "$i\t>>\t$name received from DEFAULT: $data"
-        Thread.sleep(100)
+//        Thread.sleep(100)
         return "$data;$name;${UUID.randomUUID().toString()}".toString()
 //        template.convertAndSend("choreo_done", "", "$data;${UUID.randomUUID().toString()}")
     }
