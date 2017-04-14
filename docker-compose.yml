@@ -19,6 +19,8 @@ services:
       - "8000:8000"
     links:
       - rabbit
+    depends_on:
+      - rabbit
 
   passage_sber:
     image: finnetrolle/choreo-passage:latest
@@ -30,6 +32,9 @@ services:
       - ADDITIONAL_READ_FROM=failover
     links:
       - rabbit
+    depends_on:
+      - rabbit
+      - crossroad
 
   passage_pochta:
     image: finnetrolle/choreo-passage:latest
@@ -41,6 +46,9 @@ services:
       - ADDITIONAL_READ_FROM=primary
     links:
       - rabbit
+    depends_on:
+      - rabbit
+      - crossroad
 
   passage_gcs:
     image: finnetrolle/choreo-passage:latest
@@ -52,3 +60,6 @@ services:
       - ADDITIONAL_READ_FROM=done
     links:
       - rabbit
+    depends_on:
+      - rabbit
+      - crossroad
