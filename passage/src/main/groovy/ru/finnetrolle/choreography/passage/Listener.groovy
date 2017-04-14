@@ -1,6 +1,9 @@
 package ru.finnetrolle.choreography.passage
 
+import com.rabbitmq.http.client.domain.ExchangeType
 import org.springframework.amqp.core.AmqpTemplate
+import org.springframework.amqp.core.ExchangeTypes
+import org.springframework.amqp.core.TopicExchange
 import org.springframework.amqp.rabbit.annotation.Exchange
 import org.springframework.amqp.rabbit.annotation.Queue
 import org.springframework.amqp.rabbit.annotation.QueueBinding
@@ -22,7 +25,7 @@ class Listener {
 
     @RabbitListener(bindings = @QueueBinding(
                 value = @Queue(value = '${service.name}', durable = "true", autoDelete = "true"),
-                exchange = @Exchange(value = "choreo_prime", ignoreDeclarationExceptions = "true"),
+                exchange = @Exchange(value = "choreo_prime", type = ExchangeTypes.TOPIC, ignoreDeclarationExceptions = "true"),
                 key = 'payment.${service.name}'))
     String handleDirect(String data) {
         def i = counter.incrementAndGet()
