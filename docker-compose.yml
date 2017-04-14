@@ -2,39 +2,53 @@
 version: '3'
 services:
 
+  rabbit:
+    image: rabbitmq:latest
+    container_name: rabbit
+    restart: always
+    hostname: rabbit
+
   crossroad:
     image: finnetrolle/choreo-crossroad:latest
     container_name: crossroad
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
       - SERVER_PORT=8000
     ports:
       - "8000:8000"
+    links:
+      - rabbit
 
   passage_sber:
     image: finnetrolle/choreo-passage:latest
     container_name: passage_sber
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
       - SERVICE_NAME=sber
       - ADDITIONAL_READ_FROM=failover
+    links:
+      - rabbit
 
   passage_pochta:
     image: finnetrolle/choreo-passage:latest
     container_name: passage_pochta
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
       - SERVICE_NAME=pochta
       - ADDITIONAL_READ_FROM=primary
+    links:
+      - rabbit
 
   passage_gcs:
     image: finnetrolle/choreo-passage:latest
     container_name: passage_gcs
     restart: always
     environment:
-      - RABBIT_CONNECTION_HOSTNAME=vsxo.ru
+      - RABBIT_CONNECTION_HOSTNAME=rabbit
       - SERVICE_NAME=gcs
       - ADDITIONAL_READ_FROM=done
+    links:
+      - rabbit
